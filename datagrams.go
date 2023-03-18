@@ -1,11 +1,46 @@
 package api
 
+type IDatagram interface {
+	GetIndex() int
+	SetIndex(index int)
+
+	GetType() string
+	SetType(newType string)
+
+	GetTimestamp() string
+	SetTimestamp(timestamp string)
+}
+
 // BaseDatagram Datagram
 type BaseDatagram struct {
 	Index     int    `json:"index"`
 	Type      string `json:"type"`
 	Timestamp string `json:"timestamp"`
 	// Checksum TODO
+}
+
+func (datagram *BaseDatagram) GetIndex() int {
+	return datagram.Index
+}
+
+func (datagram *BaseDatagram) SetIndex(index int) {
+	datagram.Index = index
+}
+
+func (datagram *BaseDatagram) GetType() string {
+	return datagram.Type
+}
+
+func (datagram *BaseDatagram) SetType(newType string) {
+	datagram.Type = newType
+}
+
+func (datagram *BaseDatagram) GetTimestamp() string {
+	return datagram.Timestamp
+}
+
+func (datagram *BaseDatagram) SetTimestamp(timestamp string) {
+	datagram.Timestamp = timestamp
 }
 
 type ConnectDatagram struct {
