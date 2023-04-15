@@ -51,6 +51,7 @@ type SubscribeDatagram struct {
 	BaseDatagram
 	Content  string  `json:"content"`
 	Interval float32 `json:"interval"`
+	Road     string  `json:"road"`
 }
 
 type UnsubscribeDatagram struct {
@@ -77,21 +78,71 @@ type AreaDatagram struct {
 	BottomRight PositionJSON `json:"bottomRight"`
 }
 
-type WarningDatagram struct {
-	WarnVehicleDatagram
-	VehicleId int `json:"vehicleId"`
-}
-
-type WarnVehicleDatagram struct {
+type NotifyDatagram struct {
 	BaseDatagram
-	TimeToCollision   float32 `json:"timeToCollision"`
-	CollisionType     string  `json:"collisionType"`
-	CollisionSeverity string  `json:"collisionSeverity"`
+	VehicleId   int    `json:"vehicleId"`
+	Level       string `json:"level"`
+	ContentType string `json:"contentType"`
 }
 
+type GenericNotifyDatagram struct {
+	NotifyDatagram
+	Content GenericNotificationContent `json:"content"`
+}
+
+type HeadCollisionNotifyDatagram struct {
+	NotifyDatagram
+	Content HeadCollisionNotificationContent `json:"content"`
+}
+
+type ChainCollisionNotifyDatagram struct {
+	NotifyDatagram
+	Content ChainCollisionNotificationContent `json:"content"`
+}
+
+type CrossroadNotifyDatagram struct {
+	NotifyDatagram
+	Content CrossroadNotificationContent `json:"content"`
+}
+
+type NotifyVehicleDatagram struct {
+	BaseDatagram
+	Level       string `json:"level"`
+	ContentType string `json:"contentType"`
+}
+
+type GenericNotifyVehicleDatagram struct {
+	NotifyVehicleDatagram
+	Content GenericNotificationContent `json:"content"`
+}
+
+type HeadCollisionNotifyVehicleDatagram struct {
+	NotifyVehicleDatagram
+	Content HeadCollisionNotificationContent `json:"content"`
+}
+
+type ChainCollisionNotifyVehicleDatagram struct {
+	NotifyVehicleDatagram
+	Content ChainCollisionNotificationContent `json:"content"`
+}
+
+type CrossroadNotifyVehicleDatagram struct {
+	NotifyVehicleDatagram
+	Content CrossroadNotificationContent `json:"content"`
+}
 type UpdateVehiclesDatagram struct {
 	BaseDatagram
 	Vehicles []UpdateVehiclesVehicle `json:"vehicles"`
+}
+
+type ConnectVehicleDatagram struct {
+	BaseDatagram
+	Vin string `json:"vin"`
+}
+
+type DisconnectVehicleDatagram struct {
+	BaseDatagram
+	ConnectTo string `json:"connectTo"`
 }
 
 type UpdateVehicleDatagram struct {
@@ -116,7 +167,43 @@ type UpdateVehicleVehicle struct {
 	Position     PositionJSON `json:"position"`
 }
 
+type UpdateNotificationsDatagram struct {
+	BaseDatagram
+	Notifications []UpdateNotificationsNotification `json:"notifications"`
+}
+
+type UpdateNotificationsNotification struct {
+	Timestamp   string      `json:"timestamp"`
+	VehicleId   int         `json:"vehicleId"`
+	Level       string      `json:"level"`
+	ContentType string      `json:"contentType"`
+	Content     interface{} `json:"content"`
+}
+
 type PositionJSON struct {
 	Lat float32 `json:"lat"`
 	Lon float32 `json:"lon"`
+}
+
+type GenericNotificationContent struct {
+	Text string `json:"text"`
+}
+
+type HeadCollisionNotificationContent struct {
+	TargetVehicleId      int     `json:"targetVehicleId"`
+	TimeToCollision      float32 `json:"timeToCollision"`
+	MaxSpeedExceededBy   float32 `json:"maxSpeedExceededBy"`
+	BreakingDistanceDiff float32 `json:"breakingDistanceDiff"`
+}
+
+type ChainCollisionNotificationContent struct {
+	TargetVehicleId     int     `json:"targetVehicleId"`
+	CurrentDistance     float32 `json:"currentDistance"`
+	RecommendedDistance float32 `json:"recommendedDistance"`
+}
+
+type CrossroadNotificationContent struct {
+	Text       string `json:"text"`
+	Order      int    `json:"order"`
+	RightOfWay bool   `json:"rightOfWay"`
 }
