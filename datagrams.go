@@ -1,5 +1,9 @@
 package api
 
+const (
+	TimestampFormat = "1998-06-22T14:07:00.000Z"
+)
+
 type IDatagram interface {
 	GetIndex() int
 	SetIndex(index int)
