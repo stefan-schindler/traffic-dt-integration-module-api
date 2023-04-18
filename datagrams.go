@@ -1,7 +1,7 @@
 package api
 
 const (
-	TimestampFormat = "1998-06-22T14:07:00.000Z"
+	TimestampFormat = "2006-01-02T15:04:05.999Z"
 )
 
 type IDatagram interface {
