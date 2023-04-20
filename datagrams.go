@@ -15,6 +15,11 @@ type IDatagram interface {
 	SetTimestamp(timestamp string)
 }
 
+type INotifyDatagram interface {
+	GetNotifyDatagram() *NotifyDatagram
+	GetContent() interface{}
+}
+
 // BaseDatagram Datagram
 type BaseDatagram struct {
 	Index     int    `json:"index"`
@@ -89,9 +94,17 @@ type NotifyDatagram struct {
 	ContentType string `json:"contentType"`
 }
 
+func (notifyDatagram *NotifyDatagram) GetNotifyDatagram() *NotifyDatagram {
+	return notifyDatagram
+}
+
 type GenericNotifyDatagram struct {
 	NotifyDatagram
 	Content GenericNotificationContent `json:"content"`
+}
+
+func (notifyDatagram *GenericNotifyDatagram) GetContent() interface{} {
+	return notifyDatagram.Content
 }
 
 type HeadCollisionNotifyDatagram struct {
@@ -99,14 +112,26 @@ type HeadCollisionNotifyDatagram struct {
 	Content HeadCollisionNotificationContent `json:"content"`
 }
 
+func (notifyDatagram *HeadCollisionNotifyDatagram) GetContent() interface{} {
+	return notifyDatagram.Content
+}
+
 type ChainCollisionNotifyDatagram struct {
 	NotifyDatagram
 	Content ChainCollisionNotificationContent `json:"content"`
 }
 
+func (notifyDatagram *ChainCollisionNotifyDatagram) GetContent() interface{} {
+	return notifyDatagram.Content
+}
+
 type CrossroadNotifyDatagram struct {
 	NotifyDatagram
 	Content CrossroadNotificationContent `json:"content"`
+}
+
+func (notifyDatagram *CrossroadNotifyDatagram) GetContent() interface{} {
+	return notifyDatagram.Content
 }
 
 type NotifyVehicleDatagram struct {
