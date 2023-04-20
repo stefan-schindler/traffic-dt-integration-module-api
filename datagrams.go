@@ -155,12 +155,14 @@ type UpdateVehicleDatagram struct {
 }
 
 type UpdateVehiclesVehicle struct {
+	Timestamp    string       `json:"timestamp"`
 	Id           int          `json:"id"`
 	Type         string       `json:"type"`
 	Speed        float32      `json:"speed"`
 	Acceleration float32      `json:"acceleration"`
 	Heading      float32      `json:"heading"`
 	Position     PositionJSON `json:"position"`
+	LaneId       string       `json:"laneId"`
 }
 
 type UpdateVehicleVehicle struct {
@@ -169,6 +171,7 @@ type UpdateVehicleVehicle struct {
 	Acceleration float32      `json:"acceleration"`
 	Heading      float32      `json:"heading"`
 	Position     PositionJSON `json:"position"`
+	LaneId       string       `json:"laneId"`
 }
 
 type UpdateNotificationsDatagram struct {
