@@ -13,8 +13,6 @@ type IDatagram interface {
 
 	GetTimestamp() string
 	SetTimestamp(timestamp string)
-
-	IsNil() bool
 }
 
 type INotifyDatagram interface {
@@ -28,10 +26,6 @@ type BaseDatagram struct {
 	Type      string `json:"type"`
 	Timestamp string `json:"timestamp"`
 	// Checksum TODO
-}
-
-func (datagram *BaseDatagram) IsNil() bool {
-	return datagram == nil
 }
 
 func (datagram *BaseDatagram) GetIndex() int {
