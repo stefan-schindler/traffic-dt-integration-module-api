@@ -77,6 +77,10 @@ type KeepAliveDatagram struct {
 	BaseDatagram
 }
 
+type PingDatagram struct {
+	BaseDatagram
+}
+
 type RequestAreaDatagram struct {
 	BaseDatagram
 }
